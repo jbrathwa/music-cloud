@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% block body %}
+{% for song in songs %}
+    <img src="data:image/jpeg;base64,{{song.image}}"></img>
+    <h4>{{song.title}}</h4>
+    <p>album:{{song.album}}</p>
+    <p>artist:{{song.artist}}</p>
+{% endfor %}
+{% endblock %}
