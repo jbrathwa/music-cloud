@@ -1,0 +1,7 @@
+{% extends 'index.html'%}
+{% block body %}
+<form method="POST" action="/music/upload" enctype="multipart/form-data">
+    Add Song:<input type="file" name="song">
+    <input type="submit" value="Upload">
+</form>
+{% endblock %}
