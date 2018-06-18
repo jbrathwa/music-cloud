@@ -2,9 +2,6 @@ var Song = require('../models/Song');
 var NodeID3 = require('node-id3');
 var fs = require('fs');
 
-var songs_dir ='./public/uploads';
-var songs=[];
-
 exports.add_new_song = function(req,res){
     res.render('upload');
 };
@@ -37,3 +34,13 @@ exports.song_list = function(req,res){
     });
 };
 
+exports.play_song = function(req,res){
+    var id = req.params.id;
+    Song.findById(id).exec(function(err,song){
+        if(err) throw err;
+        var readable = fs.createReadStream(song.filepath);
+        var stat = fs.statSync(song.filepath);
+        res.writeHead(200,{'Content-Type':'audio/mpeg','Content-Length':stat.size});
+        readable.pipe(res);
+    });
+};

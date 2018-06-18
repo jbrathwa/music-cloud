@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var songSchema = new Schema({
+var SongSchema = new Schema({
     title:String,
     album:String,
     artist:[String],
@@ -9,5 +9,10 @@ var songSchema = new Schema({
     filepath:String
 });
 
+SongSchema
+.virtual('url')
+.get(function(){
+    return '/music/songs/'+this._id;
+});
 
-module.exports = mongoose.model('Song',songSchema);
+module.exports = mongoose.model('Song',SongSchema);
