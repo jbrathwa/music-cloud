@@ -7,7 +7,7 @@ exports.add_new_song = function(req,res){
 };
 
 exports.upload_song = function(req,res){
-    console.log(req.file);
+    //console.log(req.file);
     NodeID3.read(req.file.path,function(err,tags){
         if(err) throw err;
         //console.log(tags);
@@ -24,7 +24,7 @@ exports.upload_song = function(req,res){
             console.log("New song added");
         });
     });
-    res.redirect('/music/songs');
+    res.redirect('/');
 };
 
 exports.song_list = function(req,res){
@@ -32,6 +32,13 @@ exports.song_list = function(req,res){
         if(err) throw err;
         res.render('songs',{songs:songs});
     });
+};
+
+exports.view_song = function(req,res){
+    Song.findById(req.params.id).exec(function(err,song){
+        if(err) throw err;
+        res.render('view_song',{song:song});
+    });   
 };
 
 exports.play_song = function(req,res){

@@ -1,11 +1,28 @@
 {% extends 'index.html' %}
 {% block body %}
 {% for song in songs %}
-    <img src="data:image/jpeg;base64,{{song.image}}"></img>
-    <h4>{{song.title}}</h4>
-    <p>album:{{song.album}}</p>
-    <p>artist:{{song.artist}}</p>
-    <audio controls><source src="{{song.url}}" type="audio/mpeg"></audio>
-    <br><br>
+    <div onclick="player(this)" id="{{song._id}}" class="row">
+        <div class="col s12">
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src="data:image/jpeg;base64,{{song.image}}" width="120" height="240"></img>
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+                <h4>{{song.title}}</h4>
+                <p>album:{{song.album}}</p>
+                <p>artist:{{song.artist}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endfor %}
+<div class="row">
+  <div class="col s12"> 
+  <div class="player">
+	<audio id="song" controls></audio>
+  </div>
+  </div>
+</div>
 {% endblock %}
